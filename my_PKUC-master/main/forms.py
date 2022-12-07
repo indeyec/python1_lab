@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from polls.models import *
-from .models import AdvUser
+from polls.models import UserProfile
+
 class UserForm(ModelForm):
     class Meta:
         model = UserProfile
@@ -16,5 +17,5 @@ class ChangeUserInfoForm(forms.ModelForm):
                              label='Адрес электронной почты')
 
     class Meta:
-        model = AdvUser
-        fields = ('username', 'email', 'first_name', 'last_name')
+        model = UserProfile
+        fields = ('user', 'image')

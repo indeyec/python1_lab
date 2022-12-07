@@ -6,7 +6,6 @@ from django.utils import timezone
 from django.contrib.auth.models import User, AbstractUser
 
 
-# Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='dp')

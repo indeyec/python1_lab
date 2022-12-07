@@ -15,18 +15,16 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xyz' # os.environ['SECRET_KEY_DJANGO']
+SECRET_KEY = 'xyz'  # os.environ['SECRET_KEY_DJANGO']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','raaj.pythonanywhere.com']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'raaj.pythonanywhere.com']
 
 # Application definition
 
@@ -74,7 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -85,11 +82,8 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
-
 
 
 # Internationalization
@@ -105,7 +99,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -115,8 +108,8 @@ LOGIN_REDIRECT_URL = "/polls/"
 LOGOUT_REDIRECT_URL = "/"
 # STATIC_ROOT = '/home/raaj/django-polls/static/'
 
-#media settings
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# media settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # email settings
@@ -126,7 +119,6 @@ EMAIL_HOST_USER = 'example@gmail.com'
 EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
-AUTH_USER_MODEL = 'main.AdvUser'

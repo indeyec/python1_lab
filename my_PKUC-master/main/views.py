@@ -1,9 +1,15 @@
-from django.shortcuts import render,redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.checks import messages
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.views.generic import UpdateView
 from polls.models import Question, Choice, Votes, UserProfile
-from .forms import UserForm
+from .forms import UserForm, ChangeUserInfoForm
+from .models import AdvUser
 
 # Create your views here.
 def home(request):
@@ -19,11 +25,11 @@ def accountSettings(request):
     form = UserForm(instance=user)
     print('first :', user.image.url)
     if request.method =='POST':
-        form = UserForm(request.POST,request.FILES,instance=user)
+        form = UserForm(request.POST, request.FILES,instance=user)
         if form.is_valid():
             form.save()
             print('second :', user.image.url)
-            return redirect('/profile/',permanent=True)
+            return redirect('/profile/', permanent=True)
     context = {'form':form}
     return render(request, 'main/account_settings.html', context)
     
@@ -59,3 +65,22 @@ class AllView(generic.ListView):
                 'user_id' : question.user_id,
                 'choices':choices})
         return context
+
+class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin,
+                         UpdateView):
+    model = AdvUser
+    template_name = 'main/change_user_info.html'
+    form_class = ChangeUserInfoForm
+    success_url = reverse_lazy('main/profile')
+    success_message = 'Личные данные пользователя изменены'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user_id = request.user.pk
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        if not queryset:
+            queryset = self.get_queryset()
+        return get_object_or_404(queryset, pk=self.user_id)
+
+

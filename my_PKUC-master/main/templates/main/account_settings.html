@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+{% block title %}
+My Profile
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+  body {
+    background: #fafafa;
+  }
+  .content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 15px;
+    margin-bottom: 20px;
+  }
+  .account-heading {
+    font-size: 2.5rem;
+  }
+  .account-img {
+    height: 150px;
+    width: 150px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  a:hover {
+        text-decoration: none;
+      }
+</style>
+
+
+<div class="card card-body">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+    <input class="btn btn-primary" type="submit" value="Update" name="Update Information">
+    </form>
+</div>
+
+<script type="text/javascript" src="js/bootstrap-filestyle.min.js"> </script>
+{% endblock content %}

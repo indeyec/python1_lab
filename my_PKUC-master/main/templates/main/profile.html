@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+{% block title %}
+My Profile
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<style>
+  .content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 15px;
+    margin-bottom: 20px;
+  }
+  .account-heading {
+    font-size: 2.5rem;
+  }
+  .account-img {
+    height: 150px;
+    width: 150px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  a:hover {
+        text-decoration: none;
+      }
+</style>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<div class="content-section">
+  <div class="media">
+    <img class="rounded-circle account-img" src="{{ user.userprofile.image.url }}">
+    <div class="media-body">
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+    </div>
+  </div>
+  <a href="account/" class="button">Change Display Picture</a>
+</div>
+{% endblock content %}
